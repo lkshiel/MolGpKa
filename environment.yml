@@ -3,15 +3,18 @@ channels:
   - rdkit
   - defaults
   - conda-forge
+  - pytorch
 dependencies:
-  - python=3.6
+  - python=3.11
   - jupyter
-  - pytorch=1.4
-  - scikit-learn=0.21.3
+  - pytorch
+  - scikit-learn
   - scikit-learn-intelex
-  - numpy=1.18.1
-  - pandas=0.25.3
+  - numpy
+  - pandas
   - rdkit
+  - flask
+  - uwsgi
   - pip:
     - py3Dmol
     - requests
