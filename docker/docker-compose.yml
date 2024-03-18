@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+
+  cts-molgpka:
+    restart: unless-stopped
+    container_name: cts-molgpka
+    # image: mambaorg/micromamba:1.5.6-alpine3.19
+    image: cts-molgpka
+    build:
+      context: ../
+      dockerfile: ./docker/flask/Dockerfile
+    expose:
+      - "8080"
+    volumes:
+      - ../:/src
+
+  cts-molgpka-nginx:
+    # image: ghcr.io/quanted/cts-pkasolver-nginx
+    image: cts-pkasolver-nginx
+    container_name: cts-molgpk-nginx
+    build:
+      context: ../
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - "8181:80"
+    links:
+      - cts-molgpka:cts-molgpka
