@@ -9,9 +9,12 @@ from rdkit import Chem
 import os
 import pandas as pd
 
-# root = os.path.abspath(os.path.dirname(__file__))
-root = os.path.join(os.path.abspath(""), "utils")
+
+root = os.path.abspath(os.path.dirname(__file__))
+
 smarts_file = os.path.join(root, "smarts_pattern.tsv")
+
+
 
 def split_acid_base_pattern(smarts_file):
     df_smarts = pd.read_csv(smarts_file, sep="\t")
@@ -29,6 +32,7 @@ def split_acid_base_pattern(smarts_file):
             index=int(index)
             index=(index-1)
             new.append(index)
+    df_smarts_acid = df_smarts_acid.copy()
     df_smarts_acid['LS_index']=new
     return df_smarts_acid, df_smarts_base
 
