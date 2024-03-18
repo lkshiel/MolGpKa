@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cts-molgpka-nginx
+  name: cts-molgpka-nginx
+  namespace: qed-kube-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cts-molgpka-nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cts-molgpka-nginx
+    spec:
+      containers:
+        - image: ghcr.io/quanted/cts-molgpka-nginx:main-51a7ea2674bb6ff5c4d330423e19803fcadf1d8c
+          imagePullPolicy: Always
+          name: cts-molgpka-nginx
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          # resources:
+          #   requests:
+          #     memory: "256Mi"
+          #     cpu: "250m"
+          #   limits:
+          #     memory: "500Mi"
+          #     cpu: "500m"
+          ports:
+            - containerPort: 443
+            - containerPort: 80
+      restartPolicy: Always

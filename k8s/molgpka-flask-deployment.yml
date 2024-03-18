@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cts-molgpka
+  name: cts-molgpka
+  namespace: qed-kube-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cts-molgpka
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cts-molgpka
+    spec:
+      containers:
+      - name: cts-molgpka
+        image: ghcr.io/quanted/cts-molgpka:main-51a7ea2674bb6ff5c4d330423e19803fcadf1d8c
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 10
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
