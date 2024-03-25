@@ -6,14 +6,14 @@ from src.predict_pka import *
 class CTSMolgpka:
 
 	def __init__(self):
-		pass
+		self.pka_dec= 2
 
 	def convert_floats(self, pka_list):
 		"""
 		Python's json serializer doesn't like np.float32 types, so
 		converting them into python floats.
 		"""
-		return [float(i) for i in pka_list]
+		return [round(float(i), self.pka_dec) for i in pka_list]
 
 	def run_molgpka(self, smiles):
 		mol = Chem.MolFromSmiles(smiles)

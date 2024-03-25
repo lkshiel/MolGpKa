@@ -16,13 +16,12 @@ services:
       - ../:/src
 
   cts-molgpka-nginx:
-    # image: ghcr.io/quanted/cts-pkasolver-nginx
-    image: cts-pkasolver-nginx
+    image: cts-molgpka-nginx
     container_name: cts-molgpk-nginx
     build:
       context: ../
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - "8181:80"
+      - "8182:80"
     links:
       - cts-molgpka:cts-molgpka

@@ -35,7 +35,7 @@ def get_data():
     if "smiles" in args:
         smiles = args["smiles"]
     else:
-        return "Missing required molgpka parater 'smiles'", 400
+        return {"error": "Missing required molgpka parater 'smiles'"}, 400
     
     try:
         smiles, num_sites, pka_list = molgpka.main(smiles)
