@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.5.6-alpine3.19
+FROM mambaorg/micromamba:1.5.8-alpine3.19
 # FROM continuumio/miniconda3:24.1.2-0
 
 USER root
