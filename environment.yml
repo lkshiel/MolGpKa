@@ -19,3 +19,4 @@ dependencies:
     - py3Dmol
     - requests
     - git+https://github.com/pyg-team/pytorch_geometric
+    - jupyter-lsp==2.2.2
