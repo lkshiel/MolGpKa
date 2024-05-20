@@ -41,6 +41,7 @@ class CTSMolgpka:
 
 		pka_list = self.convert_floats(pka_list)
 		molgpka_dict=dict(zip(pka_list,molgpka_index))#make dictionary with atom index and pkas
+		molgpka_dict=dict(zip(molgpka_index, pka_list))#make dictionary with atom index and pkas
 
 		return smiles, pka_sites, pka_list, molgpka_smiles, molgpka_dict
 
