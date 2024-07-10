@@ -18,7 +18,7 @@ spec:
         app: cts-molgpka-nginx
     spec:
       containers:
-        - image: ghcr.io/quanted/cts-molgpka-nginx:main-5662808eef67fd2d471678ff1af38a3f4a659648
+        - image: ghcr.io/quanted/cts-molgpka-nginx:dev-5662808eef67fd2d471678ff1af38a3f4a659648
           imagePullPolicy: Always
           name: cts-molgpka-nginx
           readinessProbe:
