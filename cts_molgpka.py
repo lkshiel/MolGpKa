@@ -46,10 +46,13 @@ class CTSMolgpka:
 
 		molgpka_dict = {}
 		for key, value in zip(molgpka_index, pka_list):
-		    if key in molgpka_dict:
-		        molgpka_dict[key].append(value)
-		    else:
-		        molgpka_dict[key] = [value]
+			if key in molgpka_dict:
+				molgpka_dict[key].append(value)
+			else:
+				molgpka_dict[key] = [value]
+
+		for key, val in molgpka_dict.items():
+			molgpka_dict[key] = ', '.join(map(str, val))
 
 		return smiles, pka_sites, pka_list, molgpka_smiles, molgpka_dict
 
