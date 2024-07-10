@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: cts-molgpka
-        image: ghcr.io/quanted/cts-molgpka:dev-fa928918975971c9aca1ade75c551c6c00b3bb84
+        image: ghcr.io/quanted/cts-molgpka:dev-5662808eef67fd2d471678ff1af38a3f4a659648
         imagePullPolicy: Always
         livenessProbe:
           exec:
