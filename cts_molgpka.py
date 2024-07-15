@@ -54,7 +54,7 @@ class CTSMolgpka:
 		for key, val in molgpka_dict.items():
 			molgpka_dict[key] = ', '.join(map(str, val))
 
-		return smiles, pka_sites, pka_list, molgpka_smiles, molgpka_dict
+		return smiles, pka_sites, pka_list, molgpka_smiles, molgpka_dict, molgpka_index
 
 
 
