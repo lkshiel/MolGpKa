@@ -25,7 +25,7 @@ RUN micromamba install -n $CONDA_ENV -c pytorch -c conda-forge torch-scatter
 RUN micromamba remove -n $CONDA_ENV numpy && \
 	micromamba install -n $CONDA_ENV -c conda-forge numpy
 
-RUN micromamba clean -p -t -l --trash -y
+# RUN micromamba clean -p -t -l --trash -y
 
 COPY . /src/
 
