@@ -22,6 +22,8 @@ RUN micromamba install -n $CONDA_ENV -f /src/environment.yml
 
 RUN micromamba install -n $CONDA_ENV -c pytorch -c conda-forge torch-scatter
 
+RUN micromamba run -n $CONDA_ENV pip install numpy==2.0.1
+
 # RUN micromamba remove -n $CONDA_ENV numpy && \
 # 	micromamba install -n $CONDA_ENV -c conda-forge numpy
 
