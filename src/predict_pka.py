@@ -37,12 +37,12 @@ def predict_acid(mol):
     model_file = osp.join(root, "../models/weight_acid.pth")
     model_acid = load_model(model_file)
 
-    acid_idxs= get_ionization_aid(mol, acid_or_base="acid")
+    acid_idxs,print_acid= get_ionization_aid(mol, acid_or_base="acid")##
     acid_res = {}
     for aid in acid_idxs:
         apka = model_pred(mol, aid, model_acid)
         acid_res.update({aid:apka})
-    return acid_res
+    return acid_res,print_acid ##
 
 def predict_base(mol):
     model_file = osp.join(root, "../models/weight_base.pth")
@@ -62,8 +62,8 @@ def predict(mol, uncharged=True):
         mol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
     mol = AllChem.AddHs(mol)
     base_dict = predict_base(mol)
-    acid_dict = predict_acid(mol)
-    return base_dict, acid_dict
+    acid_dict,print_acid = predict_acid(mol)##
+    return base_dict, acid_dict, print_acid, mol##
 
 def predict_for_protonate(mol, uncharged=True):
     if uncharged:
