@@ -52,6 +52,7 @@ def match_acid(df_smarts_acid, mol):
             index = [int(i) for i in index]
             for m in match:
                 matches.append([m[index[0]], m[index[1]]])
+                prnt_matches.append([m[LS_index[0]], m[LS_index[1]]])##
         else:
             new_index=int(LS_index)##make a new variable with the 0-start index
             index = int(index)
