@@ -32,7 +32,6 @@ def split_acid_base_pattern(smarts_file):
             index=int(index)
             index=(index-1)
             new.append(index)
-    df_smarts_acid = df_smarts_acid.copy()
     df_smarts_acid['LS_index']=new
     return df_smarts_acid, df_smarts_base
 
@@ -45,7 +44,8 @@ def unique_acid_match(matches):
 
 def match_acid(df_smarts_acid, mol):
     matches = []
-    for idx, name, smarts, index, acid_base, new_index in df_smarts_acid.itertuples():
+    prnt_matches=[] #
+    for idx, name, smarts, index, acid_base, LS_index in df_smarts_acid.itertuples():
         pattern = Chem.MolFromSmarts(smarts)
         match = mol.GetSubstructMatches(pattern)
         if len(match) == 0:
@@ -55,16 +55,24 @@ def match_acid(df_smarts_acid, mol):
             index = [int(i) for i in index]
             for m in match:
                 matches.append([m[index[0]], m[index[1]]])
+                prnt_matches.append([m[LS_index[0]], m[LS_index[1]]])##
         else:
-            index = int(new_index)
+            new_index=int(LS_index)##make a new variable with the 0-start index
+            index = int(index)
             for m in match:
                 matches.append([m[index]])
+                prnt_matches.append([m[LS_index]])##
     matches = unique_acid_match(matches)
+    prnt_matches=unique_acid_match(prnt_matches) ###
     matches_modify = []
+    new_matches=[] ##
     for i in matches:
         for j in i:
             matches_modify.append(j)
-    return matches_modify
+    for i in prnt_matches:##
+        for j in i:##
+            new_matches.append(j)##
+    return matches_modify,new_matches##
 
 def match_base(df_smarts_base, mol):
     matches = []
@@ -90,12 +98,12 @@ def get_ionization_aid(mol, acid_or_base=None):
 
     if mol == None:
         raise RuntimeError("read mol error: {}".format(mol_file))
-    acid_matches = match_acid(df_smarts_acid, mol)
+    acid_matches,acid_print = match_acid(df_smarts_acid, mol)##
     base_matches = match_base(df_smarts_base, mol)
     if acid_or_base == None:
         return acid_matches, base_matches
     elif acid_or_base == "acid":
-        return acid_matches
+        return acid_matches,acid_print
     else:
         return base_matches
 
