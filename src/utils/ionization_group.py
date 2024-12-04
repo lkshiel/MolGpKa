@@ -32,6 +32,10 @@ def split_acid_base_pattern(smarts_file):
             index=int(index)
             index=(index-1)
             new.append(index)
+
+    # NOTE: added from quanted/molgpka main branch to try an resolve SettingWithCopyWarning (12/4/24):
+    df_smarts_acid = df_smarts_acid.copy()
+
     df_smarts_acid['LS_index']=new
     return df_smarts_acid, df_smarts_base
 
