@@ -16,17 +16,16 @@ class CTSMolgpka:
 		return [round(float(i), self.pka_dec) for i in pka_list]
 
 	def run_molgpka(self, smiles):
-
 		mol = Chem.MolFromSmiles(smiles)
 		molgpka_smiles = Chem.MolToSmiles(Chem.MolFromSmiles(Chem.MolToSmiles(mol))) #ammended to return smile string to be used as input for chem axon
-		base_dict, acid_dict, print_acid, mol = predict(mol)
-		atom_idx = list(base_dict.keys()) + list(acid_dict.keys())
+		base_dict, acid_dict, new_idx, mol = predict(mol)
+		atom_idx = list(base_dict.keys()) + list(new_idx)
 		pkas = list(base_dict.values()) + list(acid_dict.values())
 		sites = len(pkas)
-
 		yield sites, pkas, atom_idx, molgpka_smiles
-
+		
 	def main(self, smiles):
+		
 		"""
 		Main function for returning pkas and/or microspecies.
 		Examples=['CC(O)=O','CC(C)C(N)C(O)=O','C(O)1=CC=C(N)C=C1','NC(CCS)C(O)=O','NC(CC1=CN=CN1)C(O)=O']
